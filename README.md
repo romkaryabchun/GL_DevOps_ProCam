@@ -57,3 +57,54 @@ Run the container in the following way:
 **Auhtor**
 
 Roman Ryabchun
+
+## Information
+------------
+
+Playbook for installation or update jenkins server. Can run in cloud and and office infrastructure
+
+## Requirements
+------------
+
+```console
+# Update list of packages
+sudo apt update
+
+# Install python package manager
+sudo apt install python3-pip
+
+# Install dependencies from ``requirements.txt``
+sudo pip3 install -r requirements.txt
+```
+
+## Jenkins servers
+--------------
+
+### Inbound parameters
+
+`mode`: install/update  - for install and update jenkins server accordingly
+`env`: dev/production - chose the environment
+
+### Tags
+
+`cloud` - use playbook in cloud infrastructure
+
+### Example
+
+#### Install jenkins server in cloud infrastructure into productioin environment
+
+```console
+ansible-playbook -i inventory/hosts.ini run.yml  --extra-vars "{ 'mode':'install', 'env':'production' }"
+```
+
+#### Update jenkins server in internal infrastructure in dev environment
+
+```console
+ansible-playbook -i inventory/hosts.ini run.yml  --extra-vars "{ 'mode':'update', 'env':'dev' }" --skip-tags cloud
+```
+
+
+Author
+------------------
+
+Ifrastructure team
